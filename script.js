@@ -143,40 +143,31 @@ window.onload = function () {
 
     function drawCow(x, y) {
 
+        
+
         context.save();
 
+        // Walking cycle
+        var walkCycle = Math.sin(time * 5);
 
-        // ------------------------------------------------
-        // Parent transformation
-        // ------------------------------------------------
+        // Slight vertical bounce while walking
+        var bounce = Math.abs(walkCycle) * 6;
 
-        // Move the entire cow
-        context.translate(x, y);
+        // Move the whole cow
+        context.translate(x, y - bounce);
 
-        // Flip the entire cow when direction changes
+        // Face the walking direction
         context.scale(direction, 1);
 
-
-        // Walking animation angles
-        var armAngle = Math.sin(time * 5) * 0.35;
-        var legAngle = Math.sin(time * 5) * 0.25;
-
-
-        // ------------------------------------------------
-        // Legs
-        // ------------------------------------------------
+        // Limb rotation
+        var armAngle = walkCycle * 0.35;
+        var legAngle = walkCycle * 0.30;
 
         drawLeg(-1, legAngle);
         drawLeg(1, -legAngle);
 
-
-        // ------------------------------------------------
-        // Arms
-        // ------------------------------------------------
-
         drawArm(-1, -armAngle);
         drawArm(1, armAngle);
-
 
         // ------------------------------------------------
         // Body
